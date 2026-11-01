@@ -60,3 +60,7 @@ make -C firmware test              # beam-steering unit tests
 2. EM-simulate one patch and a 3 × 3 sub-array at the 4.6 mm pitch to confirm match and coupling.
 3. Schematic and stack-up for the RF board; digital board with MCU, CAN and power.
 4. Firmware: DroneCAN node (libcanard + generated DSDL code), chirp sequencing, range/Doppler FFT, CFAR.
+
+## License
+
+MIT, see [LICENSE](LICENSE).
