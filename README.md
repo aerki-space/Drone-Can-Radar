@@ -1,26 +1,22 @@
 # Drone-Can-Radar
 
-A 24 GHz, 8×8 electronically steered phased-array radar on a **50 × 40 mm** board, for small drones,
-talking to the flight controller over **DroneCAN**.
+A compact 24 GHz phased-array radar for small drones, with a native **DroneCAN** interface.
 
-> **Status: design stage.** This repository holds the architecture, the numbers behind it, the DroneCAN
-> message definitions and the first hardware-independent firmware module. No schematic or PCB yet.
-> Every figure below comes from a script in `tools/` and is a planning estimate, not a measurement.
+> **Status:** In active development. Hardware design files, firmware and validation results will be
+> published as they are completed. Specifications below are design targets and may change.
 
-## Target specification
+## Key specifications
 
-| | Value | Source |
-|---|---|---|
-| Band | 24.00 – 24.25 GHz ISM, FMCW | [docs/regulatory.md](docs/regulatory.md) |
-| Array | 8 × 8 microstrip patches, analog beamforming, one T/R aperture | [docs/array-design.md](docs/array-design.md) |
-| Board | 50 × 40 mm; element pitch 5.6 mm (0.45 λ) × 4.6 mm (0.37 λ) | `tools/array_calc.py` |
-| Beamwidth (broadside) | ~14° azimuth × ~17° elevation | `tools/array_calc.py` |
-| Scan range | ±60° az / ±45° el planned (no grating lobes at any angle with this pitch) | `tools/array_calc.py` |
-| Directivity | ~21 dBi aperture, ~18 dBi realised (assumed) | `tools/array_calc.py` |
-| Range resolution | 0.75 m (200 MHz sweep) | `tools/radar_budget.py` |
-| Detection range (est.) | ~60 m small drone (0.01 m²), ~170 m person, IF-limited to ~95 m as configured | `tools/radar_budget.py` |
-| Velocity | ±24 m/s unambiguous, 0.76 m/s resolution | `tools/radar_budget.py` |
-| Interface | DroneCAN (classic CAN 1 Mbit/s; CAN FD capable MCU) | [docs/dronecan.md](docs/dronecan.md) |
+| | |
+|---|---|
+| Frequency | 24 GHz ISM band, FMCW |
+| Antenna | 8 × 8 electronically steered phased array |
+| Form factor | 50 × 40 mm |
+| Beamwidth | ~14° × 17° |
+| Field of regard | ±60° azimuth, ±45° elevation |
+| Range resolution | 0.75 m |
+| Velocity | ±24 m/s |
+| Interface | DroneCAN |
 
 ## Repository layout
 
@@ -54,12 +50,13 @@ python3 tools/validate_dsdl.py     # check the DroneCAN definitions
 make -C firmware test              # beam-steering unit tests
 ```
 
-## Next steps
+## Roadmap
 
-1. Choose the beamformer and transceiver ICs (see the open decisions in [docs/architecture.md](docs/architecture.md)).
-2. EM-simulate one patch and a 3 × 3 sub-array at the 4.6 mm pitch to confirm match and coupling.
-3. Schematic and stack-up for the RF board; digital board with MCU, CAN and power.
-4. Firmware: DroneCAN node (libcanard + generated DSDL code), chirp sequencing, range/Doppler FFT, CFAR.
+- Hardware design files
+- DroneCAN firmware and integration guide
+- Test and validation results
+
+More details coming soon.
 
 ## License
 
