@@ -1,0 +1,17 @@
+#
+# Hold the beam at one direction, or return to scanning.
+# Vendor-specific service: data type ID in the DroneCAN vendor range for services.
+#
+
+uint8 MODE_STANDBY = 0
+uint8 MODE_FIXED   = 1
+uint8 MODE_SCAN    = 2
+uint8 mode
+float16 azimuth             # rad, used in MODE_FIXED
+float16 elevation           # rad, used in MODE_FIXED
+
+---
+
+bool ok                     # false if the direction is outside the allowed scan limits
+float16 azimuth             # rad, direction actually applied (after limits/quantisation)
+float16 elevation           # rad

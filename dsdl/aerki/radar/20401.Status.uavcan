@@ -1,0 +1,17 @@
+#
+# Radar health and configuration summary, published at 1 Hz.
+#
+
+uint8 sensor_id
+
+uint8 MODE_STANDBY = 0      # transmitter off
+uint8 MODE_FIXED   = 1      # beam held at one direction
+uint8 MODE_SCAN    = 2      # stepping through the scan pattern
+uint8 mode
+
+bool tx_enabled
+float16 temperature         # degC, RF board
+float16 supply_voltage      # V
+float16 frame_rate          # Hz, achieved
+uint16 beams_per_scan
+uint32 error_flags          # bit set, see docs/dronecan.md

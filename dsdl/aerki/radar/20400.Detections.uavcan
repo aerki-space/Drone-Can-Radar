@@ -1,0 +1,13 @@
+#
+# Detections from one radar frame (one beam position or one full scan, see scan_complete).
+# Published at the frame rate; empty `targets` is valid and means "nothing detected".
+# Vendor-specific message: data type ID in the DroneCAN vendor range (20000-21999).
+#
+
+uavcan.Timestamp timestamp  # time the frame was captured
+uint8 sensor_id             # distinguishes several radars on one bus (parameter SENSOR_ID)
+uint16 frame_index          # wraps
+bool scan_complete          # true on the last frame of a scan pattern
+float16 beam_azimuth        # rad, beam pointing for this frame
+float16 beam_elevation      # rad
+aerki.radar.Target[<=16] targets  # strongest first

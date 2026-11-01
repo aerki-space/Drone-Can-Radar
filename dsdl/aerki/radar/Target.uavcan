@@ -1,0 +1,11 @@
+#
+# One radar detection, in the sensor frame:
+#   boresight = +X, right = +Y, down = +Z (seen from behind the array, looking out).
+# Azimuth is positive to the right, elevation positive upwards, both from boresight.
+#
+
+float16 range               # m, to the target centroid
+float16 azimuth             # rad
+float16 elevation           # rad
+float16 radial_velocity     # m/s, positive = moving away
+float16 snr                 # dB, post-integration
