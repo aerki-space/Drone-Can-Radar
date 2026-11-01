@@ -61,9 +61,9 @@ frames, or roughly 3.5 ms of a 1 Mbit/s bus.
 - **ArduPilot, today:** enable DroneCAN on the CAN port. Set a rangefinder to the DroneCAN type, with an address
   matching the node's sensor ID. The radar then works as a forward or downward rangefinder through the standard
   `range_sensor.Measurement` message, with no flight-controller changes.
-- **ArduPilot proximity / avoidance:** this needs a small driver that turns `aerki.radar.Detections` into
-  proximity sectors. ArduPilot also defines its own DroneCAN proximity message; publishing that as well may avoid a
-  custom driver. Check the current ArduPilot DSDL before choosing.
+- **ArduPilot proximity / avoidance:** also publish ArduPilot's own DroneCAN proximity message,
+  `ardupilot.equipment.proximity_sensor.Proximity` (ID 21910, 8 bytes), one per detection, so ArduPilot's obstacle
+  avoidance can use the radar without a custom driver. This is planned for the firmware.
 - **PX4:** also supports DroneCAN peripherals, including rangefinders through the standard `range_sensor.Measurement`
   message, once the rangefinder subscription is enabled in its UAVCAN parameters. The vendor `Detections` message
   would need a PX4 driver.
