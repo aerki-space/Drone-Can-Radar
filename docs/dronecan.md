@@ -25,11 +25,11 @@ The radar is a DroneCAN (UAVCAN v0) node on the vehicle's CAN bus.
 
 | Service | ID | Purpose |
 |---|---|---|
-| `aerki.radar.SetBeam` | 210 (vendor) | Standby, hold a fixed direction, or resume scanning |
+| `aerki.radar.SetBeam` | 230 (vendor) | Standby, hold a fixed direction, or resume scanning |
 
 The definitions are in [`../dsdl/aerki/radar/`](../dsdl/aerki/radar/). `python3 tools/validate_dsdl.py` parses them
-with the DroneCAN parser and prints sizes and signatures. Before release, confirm the vendor IDs don't collide with
-other vendor-specific types on the same bus.
+together with every standard and vendor namespace that ships with the DroneCAN tools, so an ID collision fails the
+check. Service 210 was moved to 230 because 210 is taken by Hobbywing's ESC `SetID` service.
 
 ## Bus load
 

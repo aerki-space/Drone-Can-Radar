@@ -10,9 +10,12 @@ import dronecan
 from dronecan import dsdl
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'dsdl', 'aerki')
-STD = os.path.join(os.path.dirname(dronecan.__file__), 'dsdl_specs', 'uavcan')
+SPECS = os.path.join(os.path.dirname(dronecan.__file__), 'dsdl_specs')
+# Parse alongside every namespace the DroneCAN tools ship (standard + known vendors),
+# so a data type ID that collides with any of them is reported as an error.
+OTHERS = [os.path.join(SPECS, d) for d in sorted(os.listdir(SPECS)) if os.path.isdir(os.path.join(SPECS, d))]
 
-types = [t for t in dsdl.parse_namespaces([ROOT], [STD]) if t.full_name.startswith('aerki.')]
+types = [t for t in dsdl.parse_namespaces([ROOT] + OTHERS) if t.full_name.startswith('aerki.')]
 if not types:
     sys.exit('no aerki types found')
 for t in sorted(types, key=lambda t: t.full_name):
